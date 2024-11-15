@@ -1,31 +1,46 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar - BlueVelvet Music Store</title>
+    <title>Register - BlueVelvet Music Store</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="register-container">
-        <h2>Registrar</h2>
-        <form id="register-form">
-            <label for="email">Email:</label>
-            <input type="email" id="register-email" name="email" required>
-            <label for="password">Senha:</label>
-            <input type="password" id="register-password" name="password" minlength="8" required>
-            <label for="role">Papel:</label>
-            <select id="role">
-                <option value="Admin">Administrador</option>
-                <option value="Sales">Gerente de Vendas</option>
-                <option value="Editor">Editor</option>
-                <option value="Assistant">Assistente</option>
-                <option value="Shipping Manager">Gerente de Envio</option>
-            </select>
-            <button type="submit">Registrar</button>
-            <p>Já tem uma conta? <a href="index.html">Login</a></p>
+    <div class="container">
+        <h1>BlueVelvet Music Store</h1>
+        <h2>Register</h2>
+        <form id="registerForm">
+            <div>
+                <input type="text" id="name" placeholder="Name" required>
+            </div>
+
+            <div>
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+
+            <div>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+
+            <div>
+                <select id="role" required>
+                    <option value="">Select Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="editor">Editor</option>
+                    <option value="salesperson">Salesperson</option>
+                    <option value="shipper">Shipper</option>
+                </select>
+             </div>
+            <button type="submit">Register</button>
         </form>
+        <p>Already have an account? <a href="index.html">Login</a></p>
     </div>
-    <script src="js/auth.js"></script>
+    <!--
+        TRABALHO: Você deverá implementar o arquivo script.js para fornecer
+         as funcionalidades de persistência de usuários, senhas e produtos, além
+        de fornecer correta navegação entre as páginas web. 
+    -->
+    <script src="script.js"></script>
 </body>
 </html>
