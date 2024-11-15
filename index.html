@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueVelvet Music Store - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Container de login -->
+    <div class="container login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" minlength="8" required>
+            
+            <!-- Checkbox para mostrar/ocultar senha -->
+            <label>
+                <input type="checkbox" id="show-password"> Mostrar senha
+            </label>
+
+            <label>
+                <input type="checkbox" name="remember-me"> Lembrar-me
+            </label>
+            
+            <button type="submit">Entrar</button>
+            <p class="error-message" id="login-error"></p>
+            <p>Não tem uma conta? <a href="register.html">Registrar</a></p>
+        </form>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/auth.js"></script>
+    <script src="js/product.js"></script>
+
+    <!-- Script para alternar a visibilidade da senha -->
+    <script>
+        // Alternar visibilidade da senha
+        document.getElementById('show-password').addEventListener('change', function() {
+            const passwordField = document.getElementById('password');
+            if (this.checked) {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        });
+    </script>
+</body>
+</html>
