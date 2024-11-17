@@ -17,7 +17,8 @@
         base no usuário autenticado.
         Template:  Welcome, {name} {(role)}
         -->
-        <div>Welcome, Atticus (Administrator)
+        <div>
+            <p id = "user-display">Welcome, <span id = "user-name">not found</span> <span id="user-role"> not found</span></p>
             <button id="logoutBtn">Logout</button>
         </div>
        
@@ -212,6 +213,6 @@
             });
         });
     </script>
-    <script src="js/product.html"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>

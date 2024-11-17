@@ -1,23 +1,5 @@
-// Função para carregar produtos na tabela
-function loadProducts() {
-    const products = JSON.parse(localStorage.getItem('products')) || [];
-    const tbody = document.getElementById('product-table').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = "";
 
-    products.forEach((product, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${product.name}</td>
-            <td>${product.brand}</td>
-            <td>${product.category}</td>
-            <td>
-                <button onclick="editProduct(${index})">Editar</button>
-                <button onclick="deleteProduct(${index})">Excluir</button>
-            </td>
-        `;
-        tbody.appendChild(row);
-    });
-}
+
 
 // Função para adicionar um novo produto
 document.getElementById('add-product-btn').addEventListener('click', function() {

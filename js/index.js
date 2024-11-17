@@ -13,7 +13,12 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     if (user) {
         // Armazena o usuário atual no LocalStorage e redireciona para o painel
         localStorage.setItem('currentUser', JSON.stringify(user));
+        if(user.role == 'admin' || user.role == 'sales_manager' || user.role == 'shipper'){
         window.location.href = "dashboard.html";
+        } else {
+            alert("Invalid role");
+            window.location.href = "index.html";
+        }
     } else {
         // Mensagem de erro se o e-mail ou senha estiverem incorretos
         errorMessage.style.display = 'block';

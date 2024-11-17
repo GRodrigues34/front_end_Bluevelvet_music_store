@@ -1,73 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product - BlueVelvet Music Store</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueVelvet Music Store - Gerenciamento de Produtos</title>
+  <link rel="stylesheet" href="css/stylesproduct.css">
 </head>
 <body>
-    <div class="container">
-        <h1>BlueVelvet Music Store</h1>
-        <h2>Add Product</h2>
+  <header>
+    <h1>Gerenciamento de Produtos</h1>
+  </header>
 
-        <form id="createProductForm">
 
-            <input type="text" id="name" placeholder="Product Name" required>
-    
-            <textarea id="shortDescription" placeholder="Short Description" required></textarea>
-           
-            <textarea id="fullDescription" placeholder="Full Description" required></textarea>
-           
-            <input type="text" id="brand" placeholder="Brand" required>
-           
-            <input type="text" id="category" placeholder="Category" required>
-           
-            <div>
-                <label>Choose main image</label>
-                <input type="file" id="mainImage" accept="image/png" required>
-            </div>
-            
-            <div>
-                <label>Choose featured images</label>
-                <input type="file" id="featuredImages" accept="image/png" multiple>
-            </div>
-          
-            <input type="number" id="listPrice" placeholder="List Price" step="0.01" required>
-         
-            <input type="number" id="discountPercent" placeholder="Discount Percent" min="0" max="100" required>
-            
-            <label>
-                <input type="checkbox" id="enabled"> Enabled
-            </label>
-          
+    <!-- Formulário de criação de produtos -->
+    <section id="product-form-section" >
+      <h2>Criar Produto</h2>
+      <form id="product-form">
+        <label for="name">Nome do Produto</label>
+        <input type="text" id="name" required>
 
-            <label>
-                <input type="checkbox" id="inStock"> In Stock
-            </label>
-            
-            <input type="number" id="length" placeholder="Length (inches)" step="0.01" required>
-           
-            <input type="number" id="width" placeholder="Width (inches)" step="0.01" required>
-           
-            <input type="number" id="height" placeholder="Height (inches)" step="0.01" required>
-         
-            <input type="number" id="weight" placeholder="Weight (pounds)" step="0.01" required>
-      
-            <input type="number" id="cost" placeholder="Cost" step="0.01" required>
-      
-            <div id="productDetails">
-                <input type="text" placeholder="Detail Name">
-                <input type="text" placeholder="Detail Value">
-                <button type="button" id="addDetailBtn">Add Detail</button>
-             </div>
+        <label for="short-description">Descrição Curta</label>
+        <textarea id="short-description" required></textarea>
 
-            <div>
-                <button type="submit">Add Product</button>
-            </div>
-        </form>
-        <a href="dashboard.html">Back to Dashboard</a>
-    </div>
-    <script src="script.js"></script>
+        <label for="full-description">Descrição Completa</label>
+        <textarea id="full-description" required></textarea>
+
+        <label for="brand">Marca</label>
+        <input type="text" id="brand" required>
+
+        <label for="category">Categoria</label>
+        <input type="text" id="category" required>
+
+        <label for="list-price">Preço</label>
+        <input type="number" id="list-price" required>
+
+        <label for="discount">Desconto (%)</label>
+        <input type="number" id="discount" step="0.01">
+
+        <label for="stock">Em Estoque</label>
+        <input type="number" id="stock" required>
+
+        <label for="enabled">Habilitado para Exibição</label>
+        <input type="checkbox" id="enabled">
+
+        <label for="unit-system">Sistema de Unidades</label>
+        <select id="unit-system">
+          <option value="imperial">Imperial (polegadas, libras)</option>
+          <option value="metric">Métrico (cm, kg)</option>
+        </select>
+
+        <label for="dimensions">Dimensões</label>
+        <input type="number" id="length" placeholder="Comprimento (polegadas)">
+        <input type="number" id="width" placeholder="Largura (polegadas)">
+        <input type="number" id="height" placeholder="Altura (polegadas)">
+        <input type="number" id="weight" placeholder="Peso (libras)">
+
+        <label for="cost">Custo</label>
+        <input type="number" id="cost" required>
+
+        <label for="product-details">Detalhes do Produto</label>
+        <div id="product-details">
+          <button type="button" id="add-detail-btn">Adicionar Detalhe</button>
+        </div>
+
+        <label for="main-image">Imagem Principal</label>
+        <input type="file" id="main-image" accept="image/png" required>
+
+        <label for="featured-images">Imagens em Destaque</label>
+        <input type="file" id="featured-images" accept="image/png" multiple>
+
+        <button type="submit">Criar Produto</button>
+      </form>
+    </section>
+
+    <!-- Lista de produtos -->
+    <section id="product-list-section">
+      <h2>Produtos Cadastrados</h2>
+      <div id="product-list"></div>
+    </section>
+  </main>
+
+  <script src="js/createProduct.js"></script>
 </body>
 </html>
