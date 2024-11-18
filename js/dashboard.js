@@ -65,22 +65,15 @@ const loadProducts = (sortBy = 'id', currentPage = 1) => {
           <td>${product.category}</td>
           <td>
               <button>View Details</button>
-              <button>Edit</button>
+              <button id>Edit</button>
               <button class="delete-btn">Delete</button>
           </td>
       `;
       productTableBody.appendChild(productRow);
   });
 
-  // Update pagination UI (optional)
-  // ... (code to update page numbers, navigation buttons, etc.)
 };
 
-
-
-// ... (rest of your JavaScript code, including event listeners for sorting and pagination)
-
-// Example usage:
 const sortSelect = document.getElementById('sortSelect');
 sortSelect.addEventListener('change', () => {
   const selectedSort = sortSelect.value;
