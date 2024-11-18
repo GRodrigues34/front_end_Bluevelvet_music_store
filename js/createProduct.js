@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     productDetailsContainer.appendChild(detailDiv);
   });
 
+  document.getElementById('back').addEventListener('click', function(){
+    window.location.href = "dashboard.html";
+  });
+
   // Atualizar unidades conforme a seleção
   unitSystem.addEventListener('change', () => {
     const isMetric = unitSystem.value === 'metric';
@@ -70,15 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  
+
   // Manipulação de envio do formulário de produto
   productForm.addEventListener('submit', (event) => {
     event.preventDefault();
-
-    const loggedUser = getLoggedUser();
-    if (!loggedUser || (loggedUser.role !== 'admin' && loggedUser.role !== 'editor')) {
-      alert('Você não tem permissão para adicionar produtos.');
-      return;
-    }
 
     const productName = document.getElementById('name').value;
     const productDescription = document.getElementById('short-description').value;
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveProduct(newProduct);
     alert('Produto adicionado com sucesso!');
     productForm.reset();
-    productFormSection.style.display = 'none';
+    productFormSection.style.display = 'block';
     loginSection.style.display = 'block';
   });
 
