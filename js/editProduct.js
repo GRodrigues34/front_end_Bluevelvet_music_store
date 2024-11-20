@@ -18,11 +18,8 @@ form.elements['discount'].value = productData.discountPercent || ""; // Handle p
 form.elements['stock'].value = productData.stock;
 form.elements['enabled'].checked = productData.enabled || false; // Handle potential missing property (assuming boolean)
 form.elements['unit-system'].value = productData.unitSystem || ""; // Handle potential missing property
+form.elements['length'].value = productData.length;
 
-// Handle dimensions (assuming they are stored as separate properties)
-if (productData.length) {
-  form.elements['length'].value = productData.length;
-}
 if (productData.width) {
   form.elements['width'].value = productData.width;
 }
