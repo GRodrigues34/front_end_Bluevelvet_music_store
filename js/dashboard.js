@@ -166,6 +166,30 @@ document.getElementById('sortSelect').addEventListener('change', (event) => {
     loadProducts(event.target.value, '', 1); // Reinicia na página 1
 });
 
+// Função para deletar produto
+function deleteProduct(productId) {
+    const confirmation = confirm("Are you sure you want to delete this product?");
+    if (!confirmation) return;
+
+    let products = getProducts();
+
+    // Confirmação de exclusão por comparação direta com IDs
+    const productIndex = products.findIndex(product => product.id === productId);
+
+    if (productIndex !== -1) {
+        products.splice(productIndex, 1); // Remove o produto pelo índice
+        saveProducts(products);
+        loadProducts(); // Atualiza a tabela
+        console.log("Product deleted successfully:", productId);
+    } else {
+        alert("Product not found.");
+    }
+
+    // Logs para depuração
+    console.log("Updated products list:", products);
+}
+
+
 // Evento de busca
 document.getElementById('searchInput').addEventListener('input', (event) => {
     loadProducts('id', event.target.value, 1); // Reinicia na página 1
