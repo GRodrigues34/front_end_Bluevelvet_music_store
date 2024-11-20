@@ -141,7 +141,8 @@ function viewProductDetails(product) {
 
 // Função para editar produto
 function editProduct(product) {
-    alert(`Edit functionality for ${product.name} not implemented yet.`);
+    localStorage.setItem('modifiedProduct', JSON.stringify(product));
+    window.location.href = "edit-product.html";
 }
 
 // Função para deletar produto

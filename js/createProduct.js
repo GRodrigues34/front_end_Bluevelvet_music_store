@@ -89,6 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const discountPercent = parseFloat(document.getElementById('discount').value) || 0;
     const stock = parseInt(document.getElementById('stock').value, 10);
     const enabled = document.getElementById('enabled').checked;
+    const cost = document.getElementById('cost').value
+    const unitSystem = document.getElementById('unit-system').value;
+    const productlength = document.getElementById('length').value;
+    const width = document.getElementById('width').value;
+    const weight = document.getElementById('weight').value;
+    const height = document.getElementById('height').value;
     const productDetails = [];
 
     // Captura os detalhes adicionais do produto
@@ -124,6 +130,12 @@ document.addEventListener('DOMContentLoaded', () => {
       enabled: enabled,
       category: productCategory,
       brand: productBrand,
+      unitSystem: unitSystem,
+      cost: cost,
+      length: productlength,
+      width: width,
+      height: height,
+      weight: weight,
       mainImage: {
         url: URL.createObjectURL(mainImageFile)
       },
