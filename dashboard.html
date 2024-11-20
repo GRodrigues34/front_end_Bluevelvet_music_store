@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - BlueVelvet Music Store</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dash.css">
 </head>
 <body>
     <div class="container">
         <h1>BlueVelvet Music Store</h1>
         <h2>Product Management</h2>
 
-        <!--
-        TRABALHO: O nome (Atticus) e papel (Administrator) abaixo foram inseridos
-        hard-coded. Na sua soluçõa o nome e papel exibidos deverão ser obtidos com 
-        base no usuário autenticado.
-        Template:  Welcome, {name} {(role)}
-        -->
+        <!-- Exibição do usuário logado -->
         <div>
-            <p id = "user-display">Welcome, <span id = "user-name">not found</span> <span id="user-role"> not found</span></p>
+            <p id="user-display">Welcome, <span id="user-name">not found</span> (<span id="user-role">not found</span>)</p>
             <button id="logoutBtn">Logout</button>
         </div>
        
+        <!-- Controles do dashboard -->
         <div id="productControls">
             <button id="resetProductsBtn">Reset Products to Initial State</button>
             <button id="addProductBtn">Add Product</button>
@@ -34,6 +30,7 @@
             </select>
         </div>
         
+        <!-- Tabela de produtos -->
         <table id="productTable">
             <thead>
                 <tr>
@@ -45,48 +42,15 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-
             <tbody id="productList">
+                <!-- Produtos renderizados dinamicamente -->
             </tbody>
         </table>
 
-        <!-- 
-            TRABALHO - Os controles de paginação somente deverão ser exibidos se tivermos menos do que 5 produtos cadastrados.
-        -->
-        <div id="pagination">
-            <button>First...</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>...Last</button>
-        </div>
+        <!-- Controles de paginação -->
+        <div id="pagination" style="display: none;"></div>
     </div>
 
-    <!-- 
-        TRABALHO: Neste momento, o código apenas exibe um alerta solicitando confirmação 
-        para excluir um produto. Você deve implementar a remoção do produto usando 
-        a API local storage e verificar a correta remoção do produto na lista de produtos exibidas no dashboard. 
-    -->
-    <script>
-        // JavaScript to show a delete confirmation alert
-        document.addEventListener('DOMContentLoaded', () => {
-            // Select all delete buttons
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            console.log(deleteButtons);
-            
-            // Add event listener to each delete button
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', (event) => {
-                    // Show confirmation alert
-                    const confirmation = confirm("Are you sure you want to delete this product?");
-                    if (!confirmation) {
-                        // Prevent default action if not confirmed
-                        event.preventDefault();
-                    }
-                });
-            });
-        });
-    </script>
     <script src="js/dashboard.js"></script>
 </body>
 </html>
