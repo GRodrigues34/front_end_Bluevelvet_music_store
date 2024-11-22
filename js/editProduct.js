@@ -1,106 +1,107 @@
-document.getElementById('back').addEventListener('click', function(){
+// Função para obter o produto modificado do localStorage
+function getModifiedProduct() {
+  return JSON.parse(localStorage.getItem('modifiedProduct'));
+}
+
+// Função para obter todos os produtos do localStorage
+function getProducts() {
+  return JSON.parse(localStorage.getItem('products')) || [];
+}
+
+// Função para salvar os produtos no localStorage
+function saveProducts(products) {
+  localStorage.setItem('products', JSON.stringify(products));
+}
+
+// Função para carregar os dados do produto no formulário
+function loadProductData() {
+  const product = getModifiedProduct();
+  if (!product) {
+      alert("Nenhum produto selecionado para edição.");
+      window.location.href = "dashboard.html";
+      return;
+  }
+
+  // Preenche os campos do formulário
+  document.getElementById('name').value = product.name || '';
+  document.getElementById('short-description').value = product.shortDescription || '';
+  document.getElementById('full-description').value = product.fullDescription || '';
+  document.getElementById('brand').value = product.brand || '';
+  document.getElementById('category').value = product.category || '';
+  document.getElementById('list-price').value = product.listPrice || 0;
+  document.getElementById('discount').value = product.discount || 0;
+  document.getElementById('stock').value = product.stock || 0;
+  document.getElementById('enabled').checked = product.enabled || false;
+  document.getElementById('unit-system').value = product.unitSystem || 'metric';
+  document.getElementById('length').value = product.dimensions?.length || 0;
+  document.getElementById('width').value = product.dimensions?.width || 0;
+  document.getElementById('height').value = product.dimensions?.height || 0;
+  document.getElementById('weight').value = product.dimensions?.weight || 0;
+  document.getElementById('cost').value = product.cost || 0;
+
+  // Configuração da imagem principal e imagens em destaque (não carregam arquivo, apenas informam)
+  if (product.mainImage) {
+      document.getElementById('main-image').dataset.currentImage = product.mainImage.url;
+  }
+
+  if (product.featuredImages) {
+      document.getElementById('featured-images').dataset.currentImages = JSON.stringify(product.featuredImages);
+  }
+}
+
+// Função para salvar os dados atualizados do formulário
+function saveUpdatedProduct(event) {
+  event.preventDefault();
+
+  const updatedProduct = {
+      ...getModifiedProduct(), // Mantém o ID original e outros valores
+      name: document.getElementById('name').value,
+      shortDescription: document.getElementById('short-description').value,
+      fullDescription: document.getElementById('full-description').value,
+      brand: document.getElementById('brand').value,
+      category: document.getElementById('category').value,
+      listPrice: parseFloat(document.getElementById('list-price').value),
+      discount: parseFloat(document.getElementById('discount').value),
+      stock: parseInt(document.getElementById('stock').value, 10),
+      enabled: document.getElementById('enabled').checked,
+      unitSystem: document.getElementById('unit-system').value,
+      dimensions: {
+          length: parseFloat(document.getElementById('length').value),
+          width: parseFloat(document.getElementById('width').value),
+          height: parseFloat(document.getElementById('height').value),
+          weight: parseFloat(document.getElementById('weight').value),
+      },
+      cost: parseFloat(document.getElementById('cost').value),
+      mainImage: {
+          url: document.getElementById('main-image').dataset.currentImage || '',
+      },
+      featuredImages: JSON.parse(document.getElementById('featured-images').dataset.currentImages || '[]'),
+  };
+
+  const products = getProducts();
+  const productIndex = products.findIndex(product => product.id === updatedProduct.id);
+
+  if (productIndex !== -1) {
+      products[productIndex] = updatedProduct; // Atualiza o produto na lista
+      saveProducts(products);
+      alert("Produto atualizado com sucesso!");
+      window.location.href = "dashboard.html";
+  } else {
+      alert("Erro ao salvar o produto. Tente novamente.");
+  }
+}
+
+// Função para manipular o botão de "voltar"
+document.getElementById('back').addEventListener('click', () => {
   window.location.href = "dashboard.html";
 });
 
-// Retrieve the product data from localStorage
-const productData = JSON.parse(localStorage.getItem('modifiedProduct'));
+// Função para testar preenchimento automático
 
-// Populate the form fields with the product data
-const form = document.getElementById('product-form');
-const productName = productData.name;
-form.elements['name'].value = productData.name;
-form.elements['short-description'].value = productData.shortDescription;
-form.elements['full-description'].value = productData.fullDescription || ""; // Handle potential missing property
-form.elements['brand'].value = productData.brand;
-form.elements['category'].value = productData.category;
-form.elements['list-price'].value = productData.listPrice;
-form.elements['discount'].value = productData.discountPercent || ""; // Handle potential missing property
-form.elements['stock'].value = productData.stock;
-form.elements['enabled'].checked = productData.enabled || false; // Handle potential missing property (assuming boolean)
-form.elements['unit-system'].value = productData.unitSystem || ""; // Handle potential missing property
-form.elements['length'].value = productData.length;
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+  loadProductData();
 
-if (productData.width) {
-  form.elements['width'].value = productData.width;
-}
-if (productData.height) {
-  form.elements['height'].value = productData.height;
-}
-if (productData.weight) {
-  form.elements['weight'].value = productData.weight;
-}
-
-form.elements['cost'].value = productData.cost;
-
-form.elements['main-image'].value = productData.mainImage;
-form.elements['featured-images'].value = productData.featuredImages;
-
-// Handle product details (assuming they are stored in an array)
-if (productData.productDetails && productData.productDetails.length > 0) {
-  const productDetailsContainer = document.getElementById('product-details');
-  productDetailsContainer.innerHTML = ""; // Clear existing details (optional)
-  for (const detail of productData.productDetails) {
-    // You might need to create additional elements to display each detail
-    console.log("Detail:", detail); // Replace with your logic to display each detail
-  }
-}
-document.getElementById('teste').addEventListener('click', function(){
-  console.log(productData);
-});
-
-
-// ... rest of your code for handling form submission and "Back" button
-
-// Handle form submission
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-// Update the product data with the form values
-productData.name = form.elements['name'].value;
-productData.shortDescription = form.elements['short-description'].value;
-productData.fullDescription = form.elements['full-description'].value;
-productData.brand = form.elements['brand'].value;
-productData.category = form.elements['category'].value;
-productData.listPrice = form.elements['list-price'].value;
-productData.discount = form.elements['discount'].value; // Assuming discount is a number
-productData.stock = form.elements['stock'].value;
-productData.enabled = form.elements['enabled'].checked;
-productData.mainImage = form.elements['main-image'].value;
-productData.featuredImages = form.elements['featured-images'].value;
-
-// Handle dimensions (assuming they are stored as separate properties)
-productData.length = form.elements['length'].value;
-productData.width = form.elements['width'].value;
-productData.height = form.elements['height'].value;
-productData.weight = form.elements['weight'].value;
-
-productData.cost = form.elements['cost'].value;
-
-// Handle product details (assuming they are stored in an array)
-const productDetailsInput = document.getElementById('product-details'); // Assuming details are entered in a text area
-productData.productDetails = productDetailsInput.value.split('\n'); // Split by newlines to create an array
-
-  // Store the updated product data in localStorage
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-    products.push(productData);
-    localStorage.setItem('products', JSON.stringify(products));
-  
-
-    const produtosString = localStorage.getItem('products');
-
-    // Filtra os produtos para encontrar o produto a ser excluído
-    products = products.filter(product => product.name !== productName);
-
-    // Atualiza o localStorage com a nova lista de produtos
-    localStorage.setItem('produtos', JSON.stringify(products));
-
-
-  // Display a success message and redirect to the desired page
-  alert('Produto atualizado com sucesso!');
-  window.location.href = 'dashboard.html';
-});
-
-// Handle the "Back" button click
-document.getElementById('back').addEventListener('click', () => {
-  window.location.href = 'product-list.html';
+  // Configuração do envio do formulário
+  document.getElementById('product-form').addEventListener('submit', saveUpdatedProduct);
 });

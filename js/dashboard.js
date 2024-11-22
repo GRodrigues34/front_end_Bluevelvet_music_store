@@ -8,6 +8,7 @@ function getProducts() {
     return JSON.parse(localStorage.getItem('products')) || [];
 }
 
+
 // Função para salvar produtos no localStorage
 function saveProducts(products) {
     localStorage.setItem('products', JSON.stringify(products));
@@ -74,9 +75,11 @@ function renderProductTable(products) {
 
     products.forEach((product, index) => {
         const productRow = document.createElement('tr');
-        productRow.innerHTML = `
-            <td>${index + 1}</td>
-            <td><img src="${product.mainImage.url}" alt="${product.name}" style="width: 100px; height: 100px;"></td>
+        const hasMainImage = product.mainImage && product.mainImage.url; // Check if mainImage exists
+    productRow.innerHTML = `
+      <td>${index + 1}</td>
+      <td>
+        ${hasMainImage ? `<img src="${product.mainImage.url}" alt="${product.name}" style="width: 100px; height: 100px;">` : ''}</td>
             <td>${product.name}</td>
             <td>${product.brand}</td>
             <td>${product.category}</td>
@@ -134,11 +137,6 @@ function renderPaginationControls(totalProducts, currentPage) {
     paginationContainer.appendChild(createButton('Last', currentPage === totalPages, () => loadProducts('id', '', totalPages)));
 }
 
-// Função para visualizar detalhes do produto
-function viewProductDetails(product) {
-    alert(`Details for ${product.name}\nBrand: ${product.brand}\nCategory: ${product.category}`);
-}
-
 // Função para editar produto
 function editProduct(product) {
     localStorage.setItem('modifiedProduct', JSON.stringify(product));
@@ -191,6 +189,7 @@ function deleteProduct(productId) {
 }
 
 
+
 // Evento de busca
 document.getElementById('searchInput').addEventListener('input', (event) => {
     loadProducts('id', event.target.value, 1); // Reinicia na página 1
@@ -206,8 +205,15 @@ document.getElementById('addProductBtn').addEventListener('click', () => {
     }
 });
 
+function viewProductDetails(product) {
+    // Atualiza a URL com o ID do produto
+localStorage.setItem('viewProduct', JSON.stringify(product));
+    window.location.href = `view-product.html?id=${product.id}`;
+  }
+
 // Inicialização do dashboard
 document.addEventListener('DOMContentLoaded', () => {
     displayUserInfo();
     loadProducts(); // Carrega a tabela inicial
 });
+
