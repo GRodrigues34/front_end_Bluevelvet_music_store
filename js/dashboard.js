@@ -209,7 +209,7 @@ function viewProductDetails(product) {
     // Atualiza a URL com o ID do produto
 localStorage.setItem('viewProduct', JSON.stringify(product));
     window.location.href = `view-product.html?id=${product.id}`;
-  }
+}
 
 // Inicialização do dashboard
 document.addEventListener('DOMContentLoaded', () => {
